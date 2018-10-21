@@ -1,19 +1,23 @@
 import constants from 'core/types'
+import Web3      from 'web3'
 
-export function setProvider(provider) {
+export function setProvider() {
   return (dispatch) => {
-    provider.eth.getAccounts((error, accounts) => {
-      if (error) { return }
+    if (window.ethereum) {
+      const { ethereum } = window
+      const web3Provider = new Web3(ethereum)
 
-      /* eslint-disable */
-      provider.eth.defaultAccount = accounts[0]
+      ethereum.enable().then((account) => {
+        const defaultAccount = account[0]
+        web3Provider.eth.defaultAccount = defaultAccount
 
-      dispatch((() => {
-        return {
-          type: constants.SET_PROVIDER,
-          provider
-        }
-      })())
-    })
+        dispatch((() => {
+          return {
+            type: constants.SET_PROVIDER,
+            web3Provider
+          }
+        })())
+      })
+    }
   }
 }

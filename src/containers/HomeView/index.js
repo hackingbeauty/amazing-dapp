@@ -31,6 +31,7 @@ class HomeView extends Component {
 
   render() {
     const { name } = this.state
+    const { nameAlreadyExists } = this.props.name
 
     return (
       <div className="container">
@@ -45,8 +46,15 @@ class HomeView extends Component {
           <br />
           <Button variant="outlined" type="submit">Submit</Button>
         </form>
+        <div></div>
       </div>
     )
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    name: state.name
   }
 }
 
@@ -58,4 +66,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(HomeView)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeView)
