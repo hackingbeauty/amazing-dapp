@@ -1,7 +1,7 @@
 import constants from 'core/types'
 
 const initialState = {
-  nameAlreadyExists: null
+  nameAlreadyExists: false
 }
 
 export function nameReducer(state = initialState, action) {

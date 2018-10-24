@@ -14,11 +14,12 @@ class HomeView extends Component {
     }
   }
 
-  onSubmit = () => {
+  onSubmit = (evt) => {
     const { actions } = this.props
     const { name } = this.state
 
     actions.name.checkIfNameExists(name)
+    evt.preventDefault()
   }
 
   handleChange = (evt) => {
@@ -46,7 +47,8 @@ class HomeView extends Component {
           <br />
           <Button variant="outlined" type="submit">Submit</Button>
         </form>
-        <div></div>
+        <br />
+        <div>Name already exists? {String(nameAlreadyExists)}</div>
       </div>
     )
   }
